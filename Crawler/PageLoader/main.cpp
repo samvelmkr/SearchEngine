@@ -6,7 +6,7 @@ int main() {
 
 	PageLoader p;
 	LoadResult res;
-	res =  p.load("http://ysu.am/main");
+	res =  p.load("http://ysu.am/main/");
 
-	std::cout << res.getBody() << " " << res.getStatus() << std::endl;
+	std::cout << *res.getBody().get() << " " << res.getStatus() << std::endl;
 }

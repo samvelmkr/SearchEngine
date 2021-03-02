@@ -2,23 +2,30 @@
 #define LOAD_RESULT_H
 
 #include <string>
+#include <memory>
+
 
 class LoadResult {
 private:
 	/**
 	 * Stores the response body
 	 */
-	std::string mBody;
+	std::shared_ptr<std::string> mBody;
 
 	/**
 	 * Stores the response status
 	 */
 	int mStatus;
 public:
+	// default constructor
 	LoadResult();
-	LoadResult(const std::string& body, int status);
-	std::string getBody();
-	int getStatus();
+	
+	// constructor
+	LoadResult(std::shared_ptr<std::string> body, int status);
+
+	// getter methods
+	std::shared_ptr<std::string> getBody() const;
+	int getStatus() const;
 };
 
 #endif

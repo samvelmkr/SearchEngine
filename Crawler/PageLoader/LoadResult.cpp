@@ -2,17 +2,15 @@
 
 LoadResult::LoadResult() {};
 
-LoadResult::LoadResult(const std::string& body, int status) 
+LoadResult::LoadResult(std::shared_ptr<std::string> body, int status) 
 	: mBody{ body }
 	, mStatus{ status }
-{		
+{}
+
+std::shared_ptr<std::string> LoadResult::getBody() const {
+	return mBody;
 }
 
-
-std::string LoadResult::getBody() {
-	return this->mBody;
-}
-
-int LoadResult::getStatus() {
-	return this->mStatus;
+int LoadResult::getStatus() const {
+	return mStatus;
 }
