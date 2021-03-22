@@ -1,4 +1,5 @@
 #include "HtmlNodes.h"
+#include <cassert>
 
 void HtmlNodes::setHtmlNodes(HtmlXPath paths) {
 	xmlNodeSetPtr nodeset = paths->nodesetval;
@@ -16,9 +17,20 @@ void HtmlNodes::setHtmlNodes(HtmlXPath paths) {
 	
 
 	nodes = vecOfNodes;
+	nodes_size = size;
 }
 
-int HtmlNodes::getSize() const {
-	return nodes.size();
+HtmlNode& HtmlNodes::operator[](std::size_t pos) {
+	assert(pos >= 0 && pos < nodes_size);
+	return nodes[pos];
+}
+
+const HtmlNode& HtmlNodes::operator[](std::size_t pos) const {
+	assert(pos >= 0 && pos < nodes_size);
+	return nodes[pos];
+}
+
+std::size_t HtmlNodes::getSize() const {
+	return nodes_size;
 }
 

@@ -7,9 +7,14 @@
 class HtmlNodes {
 private:
 	std::vector<HtmlNode> nodes;
+	std::size_t nodes_size;
 public:
 	void setHtmlNodes(HtmlXPath paths);
-	int getSize() const;
+	
+	HtmlNode& operator[](std::size_t pos);
+	const HtmlNode& operator[](std::size_t pos) const;
+
+	std::size_t getSize() const;
 		
 };
 
