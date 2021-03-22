@@ -13,7 +13,7 @@ public:
 	void setHtmlNode(xmlNodePtr n);
 	bool isElement() const;
 	std::string getAttribute(const std::string& name) const;
-	
+	bool isValidLink(const std::string& link) const;
 	std::string getLink() const;
 };
 

@@ -16,12 +16,12 @@ class HtmlDocument {
 private:
 	htmlDocPtr doc;
 	std::string url;
+
 public:
 	HtmlDocument(const std::string& str);
 	
 	void init();
 	void shutdown();
-
 	bool parse();
 
 	void findNodes(const std::string& xpath_query, std::function<void(HtmlXPath)> nodeFunc); // void* data

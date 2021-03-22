@@ -9,14 +9,14 @@ htmlDoc: HtmlDocument.o HtmlNodes.o HtmlNode.o main.o
 HtmlDocument.o: HtmlDocument.cpp
 	g++ $(CFLAGS) -c HtmlDocument.cpp -o HtmlDocument.o
 
-HtmlNodes.o: HtmlNodes.cpp
-	g++ $(CFLAGS) -c HtmlNodes.cpp -o HtmlNodes.o
-
 HtmlNode.o: HtmlNode.cpp
 	g++ $(CFLAGS) -c HtmlNode.cpp -o HtmlNode.o
 
+HtmlNodes.o: HtmlNodes.cpp
+	g++ $(CFLAGS) -c HtmlNodes.cpp -o HtmlNodes.o
+
 main.o: main.cpp
-	g++ -c main.cpp -o main.o
+	g++ $(CFLAGS) -c main.cpp -o main.o
 
 clean: 
 	rm -rf *.o htmlDoc

@@ -17,20 +17,37 @@ void HtmlNodes::setHtmlNodes(HtmlXPath paths) {
 	
 
 	nodes = vecOfNodes;
-	nodes_size = size;
+	nSize = size;
 }
 
 HtmlNode& HtmlNodes::operator[](std::size_t pos) {
-	assert(pos >= 0 && pos < nodes_size);
+	assert(pos >= 0 && pos < nSize);
 	return nodes[pos];
 }
 
 const HtmlNode& HtmlNodes::operator[](std::size_t pos) const {
-	assert(pos >= 0 && pos < nodes_size);
+	assert(pos >= 0 && pos < nSize);
 	return nodes[pos];
 }
 
 std::size_t HtmlNodes::getSize() const {
-	return nodes_size;
+	return nSize;
+}
+
+std::vector<std::string> HtmlNodes::extractLinks(HtmlDocument& doc) {
+	std::vector<std::string> links;
+
+	doc.findNodes("/html/body//a", [&links, this](HtmlXPath xpath){
+		setHtmlNodes(xpath);		
+		
+		for(int i = 0; i < nSize; ++i) {
+			std::string link = nodes[i].getLink();
+			if(!link.empty()) {
+				links.push_back(link);
+			}
+		}
+	});
+
+	return links;
 }
 

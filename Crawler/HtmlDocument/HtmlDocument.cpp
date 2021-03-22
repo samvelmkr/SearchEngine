@@ -2,9 +2,7 @@
 
 HtmlDocument::HtmlDocument (const std::string& str) 
 	: url{str}
-{
-	parse();	
-}
+{}
 
 void HtmlDocument::init() {
 	// initialization
@@ -43,7 +41,7 @@ void HtmlDocument::findNodes(const std::string& xpath_query, std::function<void(
 	HtmlXPath nodes(xmlXPathEvalExpression((const xmlChar*)xpath_query.c_str(), xpath_ctx));
 	/*if(!nodes) {
 		"failed"
-	  }*/	
+	}*/	
 
 	xmlXPathFreeContext(xpath_ctx);
 
