@@ -7,6 +7,7 @@
 
 class LinkRepository {
 private:
+	// id -> Linkentry
 	std::map<int, LinkEntry> source;
 
 public:
@@ -23,4 +24,3 @@ public:
 };
 
 #endif // LINKREPOSITORY_H
-

@@ -1,27 +1,28 @@
 #include "HtmlNode.h"
 
-void HtmlNode::setHtmlNode (xmlNodePtr n) {
-	node = n;
-}
+HtmlNode::HtmlNode (xmlNode* n) :node{n}
+{}
 
 bool HtmlNode::isElement() const {
 	return node->type == XML_ELEMENT_NODE;
 }
 
+bool HtmlNode::isText() const {
+	return node->type == XML_TEXT_NODE;
+}
+
 std::string HtmlNode::getAttribute(const std::string& name) const {
-	// search an attribute with name "name"
+	// search an attribute
 	xmlAttrPtr attr = xmlHasProp(node,(const xmlChar*)name.c_str());
 	
 	std::stringstream ss;
 	if(attr){
-		unsigned char* c = xmlGetProp(node, (const xmlChar*)name.c_str());
+		xmlChar* c = xmlGetProp(node, (const xmlChar*)name.c_str());
 		ss << c;
+		xmlFree(c);
 	}
 		
-	if(isValidLink(ss.str())) {  
-		return ss.str();
-	}
-	return "";
+	return ss.str();
 }
 
 bool HtmlNode::isValidLink(const std::string& link) const {
@@ -39,8 +40,23 @@ bool HtmlNode::isValidLink(const std::string& link) const {
 }
 
 std::string HtmlNode::getLink() const {
-	if(isElement()) {
-		return getAttribute("href");
+	std::string tmp = getAttribute("href");
+	if(isValidLink(tmp)) {
+		return tmp;
 	}
-	return "";
+	return "";	
+}
+
+std::string HtmlNode::getInnerText() const {	
+	std::stringstream ss;
+	xmlChar* c = xmlNodeGetContent(node);
+    ss << c;
+	xmlFree(c);
+	return ss.str();	
+}
+
+std::string HtmlNode::getName() const {
+	std::stringstream ss;
+    ss << node->name;
+	return ss.str();
 }

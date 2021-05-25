@@ -1,0 +1,43 @@
+MODULE WEBSITE
+add class member Domain(string), homepage(string), lastCrawlingTime(time_t) 
+and their getter functions (must return const std::string& to avoid the copy)
+
+class website{
+	string domain
+	string homepage
+	time_t lastCrawlingTime
+public:
+	website() = default;
+	website(const std::string domain, const std::string homepage, time_t t)
+	
+}
+
+MODULE WEBSITESTORE
+class websitestore {
+private:
+	/**
+	* All websites
+	*/
+	std::unordered_map<std::string, Website> all;
+public:
+	websiteStore() = default;
+	websiteStore(const vector<website> websites);
+
+	/**
+	* @return All websites
+	*/
+	std::vector<website> getAll() const;
+	/**
+	* add website to store
+	*/
+	void add(const website& website);
+	/**
+	*update information for the website
+	*/
+	void update(const website& website);
+	
+}
+
+for example 
+website=rau.am
+websiteStore is a store of websites that admin fill with some websites with which our algorithm start  

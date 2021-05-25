@@ -18,6 +18,8 @@ private:
 	// unique identifier for the link
 	int id;
 public:
+	// default constructor
+	LinkEntry() = default;
 	// constructor
 	LinkEntry(const std::string& str, int num);
 
