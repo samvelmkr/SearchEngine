@@ -2,37 +2,48 @@
 
 // return the vectorof all links
 std::vector<LinkEntry> LinkRepository::getAll() const {
-	std::vector<LinkEntry> vec;
+	return this->linkRepos;
+}
+/*
+std::vector<LinkEntry> LinkRepository::getBy (const std::string& domain, size_t count, LinkStatus status) const {
 	
-	// pass source and push LinkEntries into vector
-	for(auto elem : source) {
-		vec.push_back(elem.second);
+	std::vector<LinkEntry> res;
+
+	for (size_t i = 0; i < linkRepos.size(); ++i) {
+		if(count && domain == linkRepos[i].getDomain()){
+			if(linkRepos[i].getStatus() == LinkStatus::WAITING){
+				res.push_back(linkRepos[i]);
+				--count;
+			}		
+		}
 	}
 
-	return vec;
+	return res;
 }
+*/
+std::vector<LinkEntry> LinkRepository::getBy (const std::string& domain, LinkStatus status) const {
+	
+	std::vector<LinkEntry> res;
 
-// return LinkEntry by id
-LinkEntry LinkRepository::getById (int id) const {
-	auto it = source.find(id);
-	if(it != source.end()) {
-		return it->second;
+	for (size_t i = 0; i < linkRepos.size(); ++i) {
+		if(domain == linkRepos[i].getDomain()){ 
+			if(linkRepos[i].getStatus() == LinkStatus::WAITING){
+				res.push_back(linkRepos[i]);
+			}		
+		}
 	}
-	// TODO: CORRECT
-	return it->second;
+
+	return res;
 }
-
-void LinkRepository::save(LinkEntry& entry) {
-	auto it = source.find(entry.getId());
-	if(it == source.end()) {
-		int id = entry.getId();
-		std::string url = entry.getUrl();
-
-		LinkEntry newEntry(url, id);
-		source.insert({ id, newEntry });
+void LinkRepository::save(const LinkEntry& entry) {
+	for(size_t i = 0; i < linkRepos.size(); i++){
+		if(linkRepos[i].getUrl() == entry.getUrl()){
+			linkRepos[i] = entry;
+			return;
+		}
 	}
-
-	else {
-		it->second.setCrawlingTime();
-	}
+	linkRepos.push_back(entry);
+}
+int LinkRepository::getSize() const {
+	return this->linkRepos.size();
 }

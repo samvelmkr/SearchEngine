@@ -1,6 +1,6 @@
 #include "DocumentProcessor.h"
 
-std::vector<std::string> DocumentProcessor::extractDocument(HtmlDocument& doc) {
+Document DocumentProcessor::extractDocument(HtmlDocument& doc, const std::string& url) {
 	std::string title = "";
 	std::string description = "";
 	std::string text = "";
@@ -36,11 +36,6 @@ std::vector<std::string> DocumentProcessor::extractDocument(HtmlDocument& doc) {
 			}
 		}
 	});
-
-	std::vector<std::string> res;
-	res.push_back(title);
-	res.push_back(description);
-	res.push_back(text);
-
-	return res;
+	Document info(url, title, description, text);
+	return info;
 }

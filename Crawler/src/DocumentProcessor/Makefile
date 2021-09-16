@@ -11,6 +11,6 @@ NC = \033[1;0m
 
 all: $(OBJECT)
 
-$(BIN)/DocumentProcessor.o: DocumentProcessor.cpp DocumentProcessor.h ../HtmlDocument/HtmlDocument.h
+$(BIN)/DocumentProcessor.o: DocumentProcessor.cpp DocumentProcessor.h ../HtmlDocument/HtmlDocument.h ../DocumentRepos/DocumentRepos.h
 	@echo "$(GREEN)Processing the DocumentProcessor module...$(NC)"
 	$(CC) $(CFLAGS) -c DocumentProcessor.cpp -o $@

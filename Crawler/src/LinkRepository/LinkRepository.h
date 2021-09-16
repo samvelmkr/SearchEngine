@@ -7,20 +7,21 @@
 
 class LinkRepository {
 private:
-	// id -> Linkentry
-	std::map<int, LinkEntry> source;
+	std::vector<LinkEntry> linkRepos;
 
 public:
 	// return the vector of all links 
 	std::vector<LinkEntry> getAll() const;
 
-	LinkEntry getById(int id) const;
+//	std::vector<LinkEntry> getBy(const std::string& domain, size_t count, LinkStatus status) const;
+	std::vector<LinkEntry> getBy(const std::string& domain, LinkStatus status) const;
 	
 	/*
 	 * create a non-existing document
 	 * or update an existing document
 	 */
-	void save(LinkEntry& entry);
+	void save(const LinkEntry& entry);
+	int getSize() const;
 };
 
 #endif // LINKREPOSITORY_H

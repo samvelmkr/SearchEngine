@@ -5,7 +5,7 @@
 
 class LinkProcessor {
 public:
-	std::vector<std::string> extractLinks(HtmlDocument& doc);
+	std::vector<std::string> extractLinks(HtmlDocument& doc,  const std::string& url);
 	// make absolute url from relative url
 };
 

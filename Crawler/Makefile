@@ -2,7 +2,7 @@ TARGET = main
 
 BIN = bin
 SRC = src
-SUBDIRS = $(SRC)/PageLoader $(SRC)/HtmlDocument $(SRC)/LinkProcessor $(SRC)/DocumentProcessor $(SRC)/crawler
+SUBDIRS = $(SRC)/PageLoader $(SRC)/Website $(SRC)/DocumentRepos $(SRC)/LinkRepository $(SRC)/HtmlDocument $(SRC)/LinkProcessor $(SRC)/DocumentProcessor $(SRC)/crawler
  
 YELLOW = \033[1;33m
 NC = \033[1;0m

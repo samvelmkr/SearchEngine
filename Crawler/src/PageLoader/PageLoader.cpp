@@ -40,17 +40,22 @@ LoadResult PageLoader::load(const std::string& url) {
 	 	exit(errno);
 	}
 	
+	char* effUrl = NULL;
+	curl_easy_getinfo(curl, CURLINFO_EFFECTIVE_URL, &effUrl);
+	std::string effectiveURL(effUrl);
+	
 	long status_code = 0;
 	curl_easy_getinfo (curl, CURLINFO_RESPONSE_CODE, &status_code);
+	/*
 	if(status_code >= 200 && status_code < 300 && result != CURLE_ABORTED_BY_CALLBACK) {
 		// succeeded
 	}
 	else {
 		// failed	
 	}
-
+	*/
 	curl_easy_cleanup(curl);
-	return LoadResult(std::shared_ptr<std::string>(str_result), status_code);
+	return LoadResult(std::shared_ptr<std::string>(str_result), status_code, effectiveURL);
 	
 	// No need to delete str_result as we used std::shares_ptr
 }
